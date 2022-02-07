@@ -1,0 +1,15 @@
+footer {
+    display: block;
+    margin: 10px auto;
+    position: fixed;
+    bottom: 20px;
+}
+
+#logo-image {
+    display: block;
+    margin: 0px auto;
+    width: 300px;
+}
+div.content {
+    width: 1280px;
+}
