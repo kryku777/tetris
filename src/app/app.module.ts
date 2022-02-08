@@ -3,14 +3,19 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import {TetrisCoreModule} from 'ngx-tetris';
+import { IntroComponent } from './intro/intro.component';
+import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    IntroComponent
   ],
   imports: [
     BrowserModule,
-    TetrisCoreModule
+    TetrisCoreModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -59,7 +59,17 @@
 
 </style>
 <div class="content" role="main">
-  Hello World !
+
+  <!-- 
+    INTRO to strona logowania - wyswietlane tylko jesli zmienna currentPage == login 
+    Z intro są transmitowane dwie informacje do komponentu glownego:
+     - dane gracza(imie i email)
+     - informacja o stronie - jesli kliknieto przycisk "GO !" ma sie wyswietlić gra
+  -->
+  <app-intro *ngIf="currentPage == 'login'" 
+      (playerUpdate)="setPlayer($event)" 
+      (pageUpdate)="setPage($event)">
+  </app-intro>
 
   <!-- stopka strony -->
   <footer><div>Krzysztof Łuniewski @ 2022</div></footer>

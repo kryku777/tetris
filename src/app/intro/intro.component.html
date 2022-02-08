@@ -1,0 +1,67 @@
+<!--
+  WIDOK KOMPONENTU STRONY LOGOWANIA
+-->
+
+<!-- logo i tytul -->
+<img id="logo-image" src="../assets/logo.png" alt="Tetris World Logo" />
+<h2 id="welcome">Witaj w Tetris World <span>{{player.name}}</span></h2>
+
+<!-- 
+  formularz logowania 
+  * po zatwierdzeniu wywolywana jest funkcja start(...)
+-->
+<form #loginForm="ngForm" (ngSubmit)="start()">
+<div id="login-form">
+
+  <!-- imie -->
+  <div class="login-form-row">
+    <input type="text" id="name" name="name" 
+      [(ngModel)]="player.name"
+      placeholder="Wpisz swoje imię..." 
+      required minlength="4" 
+      class="form-control" 
+      #name="ngModel"
+    >
+  </div>
+  
+  <div class="login-form-row">  
+
+    <!-- 
+      adres email
+      ustawiamy wyrazenie regularne sprawdzajace poprawnosc
+     -->
+    <input type="email" id="email" name="email" 
+      [(ngModel)]="player.email" 
+      placeholder="Podaj swój adres e-mail..."
+      class="form-control" 
+      required
+      #email="ngModel"
+      pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" 
+    >
+  </div>
+
+  <!-- przycisk -->
+  <div class="login-form-row">
+    <button class="btn secondary" type="submit" [disabled]="loginForm.invalid">GO !</button>
+  </div>
+  
+  <!-- 
+    walidacja ... jesli cos jest nie tak wyswietlamy bledy
+    * imie nie moze byc puste
+    * imie nie moze mieć mniej niz 4 znaki
+    * email nie moze byc pusty
+    * email musi byc prawidlowy
+  -->
+  <div *ngIf="name.touched" class="error">
+    <p *ngIf="name.errors?.['required']">Imię jest wymagane.</p>
+    <p *ngIf="name.errors?.['minlength']">Imię musi mieć co najmniej 4 znaki.</p>
+  </div>
+
+  <div *ngIf="email.touched" class="error">
+    <p *ngIf="email.errors?.['required']">Adres e-mail jest wymagany.</p>
+    <p *ngIf="email.errors?.['pattern']">To nie jest poprawny adres e-mail.</p>
+  </div>
+
+</div>
+
+</form>

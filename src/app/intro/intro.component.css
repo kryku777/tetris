@@ -1,0 +1,41 @@
+
+#login-form {
+    display:block;
+    width: 300px;
+    margin: 20 px auto;
+    padding:30px;
+    background-color: #000;
+    height: 300px;
+}
+#login-form div {
+    display: block;
+    text-align: center;
+    clear: both;
+}
+
+h2#welcome {
+    text-align: center;
+}
+
+h2#welcome span {
+    color: #fff;
+}
+
+#login-form input {
+    border: 1px solid #fff;
+    background: none;
+    padding: 10px 6px;
+    color: #fff;
+    margin-bottom: 20px;
+    width: 80%;
+}
+
+#login-form div.error p {
+    width: 80%;
+    padding:5px;
+    border: 1px solid #881400;
+    font-size: 10pt;
+    margin: 0 auto;
+    padding: 3px; 
+    margin-bottom: 3px;
+}
