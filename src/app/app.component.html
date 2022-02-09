@@ -71,6 +71,17 @@
       (pageUpdate)="setPage($event)">
   </app-intro>
 
+
+  <!--
+    GAME to komponent z właściwym ekranem gry - wyświetlany tylko jesli currentPage == game
+    * wysyła do komponentu rodzica informacje o stronie - jesli chcemy wyjść z gry musimy ją zmienić spowrotem na login
+    * przekazujemy do niego dane playera, zeby wyswietlic imie gracza.
+  -->
+  <app-game *ngIf="currentPage == 'game'"
+      [currentPlayer]=player 
+      (pageUpdate)="setPage($event)">
+  </app-game>
+
   <!-- stopka strony -->
   <footer><div>Krzysztof Łuniewski @ 2022</div></footer>
 
