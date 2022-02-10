@@ -2,6 +2,7 @@ import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit, ViewChild, Output, EventEmitter, Input } from '@angular/core';
 import { HostListener } from '@angular/core';
 import { TetrisCoreComponent } from 'ngx-tetris';
+import { GameAction, HistoryEntry } from '../history-entry';
 import { Player } from '../player';
 
 @Component({
@@ -35,6 +36,8 @@ export class GameComponent implements OnInit {
   // * gdy pauzujemy gre napis statusu podswietla sie na czerwono
   statusStyle= 'white';
   
+  // to jest tablica obiektow HistoryEntry przechowujaca kolejne akcje do wyswietlenia w tabeli 
+  history: HistoryEntry[] = [];
 
   //informacja o aktualnym graczu przekazana z zewnatrz
   @Input() currentPlayer: Player;
@@ -42,10 +45,20 @@ export class GameComponent implements OnInit {
   //wysylamy infomacje o zmienionej stronie do komponentu rodzia 
   @Output() pageUpdate = new EventEmitter<string>();
 
+  /**
+   * funkcja logujaca do historii wszystkie dzialania, zapisuje:
+   * Typ akcji - zmienna typu GameAction (z pliku history-entry.ts)
+   * Aktualna liczba punktow
+   * Aktualna data/czas
+   * */
+  logAction(act:GameAction) {
+    this.history.push(new HistoryEntry(act, this.linesCleared));
+  }
 
   //gdy zdobedziemy punkt zwiekszamy liczbe punktow i logujemy akcje do historii
   onLineCleared() {
     this.linesCleared++;
+    this.logAction(GameAction.lineCleared);
   }
 
   //gdy przegramy zatrzymujemy timer, wyswietlamy info o koncu gry i logujemy akcję
@@ -53,6 +66,7 @@ export class GameComponent implements OnInit {
     this.pauseTimer();
     this.gameOverInfo = true;
     this.boardStyle = 'game-over';
+    this.logAction(GameAction.gameOver);
   }
 
   //gdy wychodzimy z gry wysylamy informacje o zmianie strony do komponentu rodzica
@@ -113,11 +127,13 @@ export class GameComponent implements OnInit {
             this.pauseTimer();
             this.status = 'STOP';
             this.game.actionStop();
+            this.logAction(GameAction.pause);
             this.statusStyle = 'red';
           } else if (this.status == 'STOP') {
             this.restartTimer();
             this.status = 'START';
             this.game.actionStart();
+            this.logAction(GameAction.resume);
             this.statusStyle = 'white';
           }
         }
@@ -133,6 +149,7 @@ export class GameComponent implements OnInit {
       case 'Enter':
         this.boardStyle = 'default';
         this.gameOverInfo = false;
+        this.logAction(GameAction.start);
         this.statusStyle = 'white';
         if(this.status == 'READY') {
           this.startTimer();

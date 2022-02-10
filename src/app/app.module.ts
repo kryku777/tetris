@@ -6,12 +6,14 @@ import {TetrisCoreModule} from 'ngx-tetris';
 import { IntroComponent } from './intro/intro.component';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { GameComponent } from './game/game.component';
+import { HistoryComponent } from './history/history.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     IntroComponent,
-    GameComponent
+    GameComponent,
+    HistoryComponent
   ],
   imports: [
     BrowserModule,
