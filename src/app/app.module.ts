@@ -7,13 +7,16 @@ import { IntroComponent } from './intro/intro.component';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { GameComponent } from './game/game.component';
 import { HistoryComponent } from './history/history.component';
+import {FilterPipe, SortByPipe} from './pipes'
 
 @NgModule({
   declarations: [
     AppComponent,
     IntroComponent,
     GameComponent,
-    HistoryComponent
+    HistoryComponent, 
+    FilterPipe, 
+    SortByPipe
   ],
   imports: [
     BrowserModule,

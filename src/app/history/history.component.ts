@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { HistoryEntry } from '../history-entry';
-import { Pipe, PipeTransform } from '@angular/core';
 
 @Component({
   selector: 'app-history',

@@ -9,11 +9,12 @@ Filtruj akcje: <input id="term" name="term" [(ngModel)]="term" placeholder="Zacz
     <thead>
         <tr>
             <th>Akcja</th>
-            <th>Czas</th>
+            <!-- tu jest link do sortowania - kazde klikniecie zmienia kierunek wywolujac funkcje toggleOrder() -->
+            <th>Czas <a id="sort-button" href="javascript:return false;" (click)="toggleOrder()">[ Sortuj ]</a></th>
             <th>Punkty</th>
         </tr>
     </thead>
-    <tr *ngFor="let entry of history">
+    <tr *ngFor="let entry of history | filter : term | sort: order">
         <td>{{entry.action}}</td>
         <td>{{entry.timestamp| date: 'dd/MM/yyyy HH:mm:ss'}}</td>
         <td>{{entry.points}}</td>
